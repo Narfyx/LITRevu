@@ -1,0 +1,18 @@
+name = 'admin'
+password = 'azerty12345'
+email = 'admin@litrevu.fr'
+
+
+name = 'toto'
+password = '$n3t_#Dy#jNzjj6'
+
+
+
+
+
+
+
+
+ 2063  python manage.py makemigrations
+ 2064  python manage.py migrate
+ 2065  python manage.py createsuperuser
