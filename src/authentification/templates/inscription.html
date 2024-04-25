@@ -60,18 +60,20 @@
         <div class="header">
             <h1>LITReview</h1> <!-- Traduction du texte -->
         </div>
-        <div class="signup">
+        <div class="inscription">
             <h2>Inscrivez-vous maintenant</h2>
             <!-- L'action doit être configurée pour envoyer les données à la vue d'inscription -->
-            <form method="post" action="{% url 'signup' %}"> 
+            <form method="post" action="{% url 'inscription' %}"> 
                 {% csrf_token %}
+                {{ form.as_p}}
                 <button type="submit" class="button-inscription">S'inscrire</button>
+                
             </form>
         </div>
         <div class="login">
             <h2>Connectez-vous</h2>
             <!-- L'action doit être configurée pour envoyer les données à la vue de connexion -->
-            <form method="post" action="{% url 'login' %}">
+            <form method="post" action="{% url 'connexion' %}">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="username">Nom d'utilisateur</label>
