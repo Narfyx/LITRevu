@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from .form import CustomUserCreationForm
 from django.http import HttpResponse
 
-
+from .form import CustomUserCreationForm
 
 def inscription(request):
     if request.method == 'POST':
@@ -27,7 +26,7 @@ def connexion(request):
             return redirect('acceuil')
         else:
             messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
-        return render(request, 'inscription.html')
+    return render(request, 'connexion.html')
 
 def acceuil(request):
     return render(request, 'acceuil.html')

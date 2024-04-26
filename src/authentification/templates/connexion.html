@@ -55,19 +55,26 @@
         <div class="header">
             <h1>LITReview</h1> <!-- Traduction du texte -->
         </div>
-        <div class="login">
-            <h2>Connectez-vous</h2>
-            <a href="{% url 'connexion' %}">
-                <button type="submit" class="button">Se connecter</button>
-            </a>
-        </div>
         <div class="inscription">
             <h2>Inscrivez-vous maintenant</h2>
-            <!-- L'action doit être configurée pour envoyer les données à la vue d'inscription -->
-            <form method="post" action="{% url 'inscription' %}"> 
+            <a href="{% url 'inscription' %}">
+                <button type="submit" class="button">Inscription</button>
+            </a>
+        </div>
+        <div class="login">
+            <h2>Connectez-vous</h2>
+            <!-- L'action doit être configurée pour envoyer les données à la vue de connexion -->
+            <form method="post" action="{% url 'connexion' %}">
                 {% csrf_token %}
-                <button type="submit" class="button">S'inscrire</button>
-                {{ form.as_p}}
+                <button type="submit" class="button">Se connecter</button>
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="psw">Mot de passe</label>
+                    <input type="password" id="psw" name="password" required>
+                </div>
                 
             </form>
         </div>

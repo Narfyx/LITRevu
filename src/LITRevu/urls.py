@@ -24,8 +24,8 @@ from .views import index
 urlpatterns = [
     
     path("admin/", admin.site.urls),
-    path("", views.inscription, name="inscription"),
-    path("login", views.connexion, name="connexion"),
+    path("", views.connexion, name="connexion"),
+    path("inscription", views.inscription, name="inscription"),
     path("acceuil", views.acceuil, name="acceuil"),
     
 ]
