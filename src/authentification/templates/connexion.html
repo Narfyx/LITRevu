@@ -32,6 +32,7 @@
             display: inline-block;
             border: 1px solid #ccc;
             box-sizing: border-box;
+            border-radius: 5px;
         }
         .button {
             background-color: #4CAF50;
@@ -41,12 +42,16 @@
             border: none;
             cursor: pointer;
             width: 100%;
+            border-radius: 20px;
         }
 
         .clearfix::after {
             content: "";
             clear: both;
             display: table;
+        }
+        .error {
+            color: red;
         }
     </style>
 </head>
@@ -63,6 +68,7 @@
         </div>
         <div class="login">
             <h2>Connectez-vous</h2>
+            
             <!-- L'action doit être configurée pour envoyer les données à la vue de connexion -->
             <form method="post" action="{% url 'connexion' %}">
                 {% csrf_token %}
@@ -77,6 +83,13 @@
                 </div>
                 
             </form>
+            {% if messages %}
+            <div class="error-messages">
+                {% for message in messages %}
+                <p class="error">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
         <div class="clearfix"></div>
     </div>

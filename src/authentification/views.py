@@ -6,12 +6,13 @@ from django.http import HttpResponse
 
 from .form import CustomUserCreationForm
 
+
 def inscription(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('acceuil')
+            return redirect('user_follow')
     else:
         form = CustomUserCreationForm()
     return render(request, 'inscription.html', {'form': form})
@@ -23,11 +24,12 @@ def connexion(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('acceuil')
+            return redirect('user_follow')
         else:
             messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
     return render(request, 'connexion.html')
 
-def acceuil(request):
-    return render(request, 'acceuil.html')
 
+def deconnexion(request):
+    logout(request)
+    return redirect('connexion') 

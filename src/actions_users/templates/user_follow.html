@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LITReview Subscriptions</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    width: 750px;
+    margin: auto;
+    border: 1px solid #000;
+    padding: 20px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .section {
+    margin-bottom: 20px;
+  }
+  .subscription-section {
+    display: flex;
+    justify-content: space-between;
+  }
+  .subscription-list {
+    width: 48%;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 9px 0px;
+    margin: 5px 5px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    border-radius: 20px;
+    
+  }
+  input[type="text"]{
+    padding: 8px;
+    width: 50%;
+    border-radius: 5px;
+  }
+  .username {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>LITReview</h1>
+    <nav>
+      <a href="#">Flux</a> |
+      <a href="#">Posts</a> |
+      <a href="{% url 'user_follow' %}">Abonnements</a> |
+      <a href="{% url 'deconnexion' %}">Se déconnecter</a>
+
+    </nav>
+  </div>
+  <h2 class="username">Bonjour, {{ user.username }}</h2>
+  <div class="section">
+    <h2>Suivre d'autres utilisateurs</h2>
+    <input type="text" placeholder="Nom d'utilisateur">
+    <button>Envoyer</button>
+  </div>
+  <div class="section subscription-section">
+    <div class="subscription-list">
+      <h2>Abonnements</h2>
+      <ul>
+        <li>exemple user_1 <button>Désabonner</button></li>
+        <li>exemple user_2  <button>Désabonner</button></li>
+        <li>exemple user_3  <button>Désabonner</button></li>
+      </ul>
+    </div>
+    <div class="subscription-list">
+      <h2>Abonnés</h2>
+      <ul>
+        <li>exemple user_1 </li>
+        <li>exemple user_3 </li>
+      </ul>
+    </div>
+  </div>
+
+  
+</div>
+</body>
+</html>

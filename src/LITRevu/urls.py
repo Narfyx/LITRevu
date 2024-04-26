@@ -18,14 +18,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from authentification import views
+from authentification import views as auth_view
+from actions_users import views as actions_view
 from .views import index
 
 urlpatterns = [
     
     path("admin/", admin.site.urls),
-    path("", views.connexion, name="connexion"),
-    path("inscription", views.inscription, name="inscription"),
-    path("acceuil", views.acceuil, name="acceuil"),
+    path("", auth_view.connexion, name="connexion"),
+    path("inscription", auth_view.inscription, name="inscription"),
+    path("user_follow", actions_view.user_follow, name="user_follow"),
+    path('deconnexion/', auth_view.deconnexion, name='deconnexion'),
     
 ]
