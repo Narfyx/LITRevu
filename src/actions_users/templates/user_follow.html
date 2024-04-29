@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LITReview Subscriptions</title>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"
+/>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -13,6 +18,7 @@
     margin: auto;
     border: 1px solid #000;
     padding: 20px;
+    height: 500px;
   }
   .header {
     text-align: center;
@@ -22,13 +28,14 @@
     margin-bottom: 20px;
   }
   .subscription-section {
-    display: flex;
+
     justify-content: space-between;
   }
   .subscription-list {
     width: 48%;
+    float: left;
   }
-  button {
+  button[type="submit"] {
     background-color: #4CAF50;
     color: white;
     padding: 9px 0px;
@@ -37,17 +44,21 @@
     cursor: pointer;
     width: 30%;
     border-radius: 20px;
-    
   }
+  
   input[type="text"]{
     padding: 8px;
     width: 50%;
     border-radius: 5px;
+    text-indent: 10%;
   }
+
   .username {
     text-align: center;
   }
 </style>
+
+
 </head>
 <body>
 <div class="container">
@@ -63,17 +74,39 @@
   </div>
   <h2 class="username">Bonjour, {{ user.username }}</h2>
   <div class="section">
-    <h2>Suivre d'autres utilisateurs</h2>
-    <input type="text" placeholder="Nom d'utilisateur">
-    <button>Envoyer</button>
+    <div class="section">
+      <h2>Suivre d'autres utilisateurs</h2>
+      <div id="autocomplete" class="autocomplete">
+        <input class="autocomplete-input" type="text" name="search_query" placeholder="Nom d'utilisateur">
+        <ul class="autocomplete-result-list"></ul>
+        <button type="submit">Envoyer</button>
+      </div>
+      <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+      <script>
+        new Autocomplete('#autocomplete', {
+          search : input =>{
+            console.log(input)
+            const url = `/search_user/?user=${input}`
+            return new Promise(resolve =>{
+              fetch(url)
+              .then(response => response.json())
+              .then(data => {
+                console.log(data)
+                resolve(data.data)
+              })
+            })
+          }
+        })
+      </script>
+    </div>
   </div>
   <div class="section subscription-section">
     <div class="subscription-list">
       <h2>Abonnements</h2>
       <ul>
-        <li>exemple user_1 <button>Désabonner</button></li>
-        <li>exemple user_2  <button>Désabonner</button></li>
-        <li>exemple user_3  <button>Désabonner</button></li>
+        <li>exemple user_1 <button type="submit">Désabonner</button></li>
+        <li>exemple user_2  <button type="submit">Désabonner</button></li>
+        <li>exemple user_3  <button type="submit">Désabonner</button></li>
       </ul>
     </div>
     <div class="subscription-list">

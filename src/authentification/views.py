@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 from .form import CustomUserCreationForm
 
@@ -30,6 +31,8 @@ def connexion(request):
     return render(request, 'connexion.html')
 
 
+
+@login_required
 def deconnexion(request):
     logout(request)
     return redirect('connexion') 

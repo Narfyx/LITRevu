@@ -26,8 +26,9 @@ urlpatterns = [
     
     path("admin/", admin.site.urls),
     path("", auth_view.connexion, name="connexion"),
-    path("inscription", auth_view.inscription, name="inscription"),
-    path("user_follow", actions_view.user_follow, name="user_follow"),
+    path("inscription/", auth_view.inscription, name="inscription"),
+    path("user_follow/", actions_view.user_follow, name="user_follow"),
     path('deconnexion/', auth_view.deconnexion, name='deconnexion'),
+    path('search_user/', actions_view.search_user),
     
 ]

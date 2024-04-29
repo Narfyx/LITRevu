@@ -11,6 +11,35 @@ name = 'titi'
 password = 'azerty12345*'
 
 
+name = 'alice'
+password = 'Passw0rd!'
+
+name = 'bob'
+password = 'Secret123*'
+
+name = 'caroline'
+password = 'Caro@1234'
+
+name = 'david'
+password = 'Dav!dPass'
+
+name = 'emilie'
+password = 'Emi#12345'
+
+name = 'francois'
+password = 'Fr@nco!s987'
+
+name = 'gabrielle'
+password = 'G@bbyPass'
+
+name = 'henri'
+password = 'H3nr!Pa$$'
+
+name = 'isabelle'
+password = '1sa&b3ll@'
+
+name = 'jacques'
+password = 'J@cqu3$99'
 
 
 
