@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SearchUserForm
 
 from pprint import pprint
+
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
@@ -20,14 +21,16 @@ def user_follow(request):
 
 
 def search_user(request):
-    users_list = []
     
+    current_user = request.user
+    users_list = []
     search_query = request.GET.get('user')
 
     if search_query:
         users_objs = User.objects.filter(username__icontains=search_query, is_active=True)
-        
         for user_obj in users_objs:
+            if user_obj.username == 'admin' or user_obj.username == current_user.username:
+                continue
             users_list.append(user_obj.username)
 
     return JsonResponse({'status':200, 'data':users_list})

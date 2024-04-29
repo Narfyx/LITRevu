@@ -1,98 +1,27 @@
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>LITReview</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            width: 750px;
-            margin: auto;
-            border: 1px solid #000;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .login, .inscription {
-            display:inline-table;
-            text-align: left;
-            width: 350px;
-            height: 300px;
-            margin: 5px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin: 10px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            border-radius: 5px;
-        }
-        .button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 20px;
-        }
+{% extends 'base.html' %}
 
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-        .error {
-            color: red;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>LITReview</h1> <!-- Traduction du texte -->
-        </div>
-        <div class="inscription">
-            <h2>Inscrivez-vous maintenant</h2>
-            <a href="{% url 'inscription' %}">
-                <button type="submit" class="button">Inscription</button>
-            </a>
-        </div>
-        <div class="login">
-            <h2>Connectez-vous</h2>
-            
-            <!-- L'action doit être configurée pour envoyer les données à la vue de connexion -->
-            <form method="post" action="{% url 'connexion' %}">
-                {% csrf_token %}
-                <button type="submit" class="button">Se connecter</button>
-                <div class="form-group">
-                    <label for="username">Nom d'utilisateur</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="psw">Mot de passe</label>
-                    <input type="password" id="psw" name="password" required>
-                </div>
-                
-            </form>
-            {% if messages %}
-            <div class="error-messages">
-                {% for message in messages %}
-                <p class="error">{{ message }}</p>
-                {% endfor %}
-            </div>
-            {% endif %}
-        </div>
-        <div class="clearfix"></div>
+{% block content %}
+    <div class="inscription">
+        <h2>Inscrivez-vous maintenant</h2>
+        <a href="{% url 'inscription' %}">
+            <button type="submit" class="button">Inscription</button>
+        </a>
     </div>
-</body>
-</html>
+    <div class="login">
+        <h2>Connectez-vous</h2>
+        <form method="post" action="{% url 'connexion' %}">
+            {% csrf_token %}
+            <button type="submit" class="button">Se connecter</button>
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="psw">Mot de passe</label>
+                <input type="password" id="psw" name="password" required>
+            </div> 
+        </form>
+    </div>
+{% endblock %}
 
