@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .form import CustomUserCreationForm
 
@@ -25,6 +26,9 @@ def connexion(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            if user.username == 'admin':
+                print("OKKKK")
+                return redirect('admin/login/?next=/admin/')
             return redirect('user_follow')
         else:
             messages.error(request, "Nom d'utilisateur ou mot de passe incorrect.")
