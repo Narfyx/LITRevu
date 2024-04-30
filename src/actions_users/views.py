@@ -33,4 +33,3 @@ def search_user(request):
             users_list.append(user_obj.username)
 
     return JsonResponse({'status':200, 'data':users_list})
-    #return render(request, 'search.html')  # Assurez-vous que ce template existe

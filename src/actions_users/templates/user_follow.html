@@ -1,6 +1,37 @@
 {% extends 'user_actions_base.html' %}
 
 {% block content %}
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
+    <style>
+      .section {
+        margin-bottom: 20px;
+      }
+      .subscription-section {
+        justify-content: space-between;
+      }
+      .subscription-list {
+        width: 48%;
+        float: left;
+      }
+      button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 9px 0px;
+        margin: 5px 5px;
+        border: none;
+        cursor: pointer;
+        width: 30%;
+        border-radius: 20px;
+      }
+      input[type="text"]{
+        padding: 8px;
+        width: 50%;
+        border-radius: 5px;
+        text-indent: 10%;
+      }
+    </style>
+  </head>
   <div class="section">
     <div class="section">
       <h2>Suivre d'autres utilisateurs</h2>
