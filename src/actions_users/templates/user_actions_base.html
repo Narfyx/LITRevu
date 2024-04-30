@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LITReview Subscriptions</title>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"
+/>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    width: 750px;
+    margin: auto;
+    border: 1px solid #000;
+    padding: 20px;
+    height: 500px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .section {
+    margin-bottom: 20px;
+  }
+  .subscription-section {
+
+    justify-content: space-between;
+  }
+  .subscription-list {
+    width: 48%;
+    float: left;
+  }
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 9px 0px;
+    margin: 5px 5px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    border-radius: 20px;
+  }
+  
+  input[type="text"]{
+    padding: 8px;
+    width: 50%;
+    border-radius: 5px;
+    text-indent: 10%;
+  }
+
+  .username {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+    <div class="container">    
+        <div class="header">
+            <h1>LITReview</h1>
+            <nav>
+                <a href="#">Flux</a> |
+                <a href="#">Posts</a> |
+                <a href="{% url 'user_follow' %}">Abonnements</a> |
+                <a href="{% url 'deconnexion' %}">Se déconnecter</a>
+            </nav>
+        </div>
+    <h2 class="username">Bonjour, {{ user.username }}</h2>
+    {% block content %}
+    <!-- Contenu par défaut si le block n'est pas surchargé -->
+    {% endblock %}
+    <div class="clearfix"></div>
+    </div>
+    
+</body>
+</html>

@@ -19,9 +19,8 @@ def user_follow(request):
     return render(request, 'user_follow.html')
 
 
-
+@login_required
 def search_user(request):
-    
     current_user = request.user
     users_list = []
     search_query = request.GET.get('user')
