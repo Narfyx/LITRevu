@@ -4,49 +4,23 @@
 {% load static %}
   <head>
     <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
-    <link rel="stylesheet" href="{% static 'actions_users/user_follow.css' %}">
+    <link rel="stylesheet" href="{% static 'actions_users/css/user_follow.css' %}">
   </head>
+
   <div class="section">
-    <div class="section">
-      <h2>Suivre d'autres utilisateurs</h2>
-      <form method="POST" action="/follow/" id="userForm">
-        {% csrf_token %}
-        <div id="autocomplete" class="autocomplete">
-          <input class="autocomplete-input" type="text" name="search_query" placeholder="Nom d'utilisateur">
-          <ul class="autocomplete-result-list"></ul>
-          <button type="submit">Suivre</button>
-        </div>
-        <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-        <script>
-          new Autocomplete('#autocomplete', {
-            search : input =>{
-              console.log(input)
-              const url = `/search_user/?user=${input}`
-              return new Promise(resolve =>{
-                fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                  console.log(data)
-                  resolve(data.data)
-                })
-              })
-            },
-            getResultValue: result => result,
-            onSubmit: result => {
-              // Here you handle the form submission
-              // Prevent the default form submission
-              event.preventDefault();
-              const username = document.querySelector('.autocomplete-input').value;
-              // Change form action based on the username
-              const form = document.getElementById('userForm');
-              form.action = `/follow/${username}/`;
-              
-            }
-          })
-        </script>
-      </form>
-    </div>
+    <h2>Suivre d'autres utilisateurs</h2>
+    <form method="POST" action="/follow/" id="userForm">
+      {% csrf_token %}
+      <div id="autocomplete" class="autocomplete">
+        <input class="autocomplete-input" type="text" name="search_query" placeholder="Nom d'utilisateur">
+        <ul class="autocomplete-result-list"></ul>
+        <button type="submit">Suivre</button>
+      </div>
+      <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+      <script src="{% static 'actions_users/js/search_user.js' %}"></script>
+    </form>
   </div>
+
   <div class="section subscription-section">
     <div class="subscription-list">
       <h2>Abonnements</h2>
