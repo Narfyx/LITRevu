@@ -16,10 +16,11 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 
-from authentification import views as auth_view
 from actions_users import views as actions_view
+from authentification import views as auth_view
+
 from .views import index
 
 urlpatterns = [
@@ -27,10 +28,10 @@ urlpatterns = [
     path("", auth_view.connexion, name="connexion"),
     path("inscription/", auth_view.inscription, name="inscription"),
     path("user_follow/", actions_view.user_follow, name="user_follow"),
-    path('deconnexion/', auth_view.deconnexion, name='deconnexion'),
-    path('search_user/', actions_view.search_user),
-    path('follow/<str:username>/', actions_view.follow_user, name='follow_user'),
-    path('unfollow/<str:username>/', actions_view.unfollow_user, name='unfollow_user'),
-    path("flux" , actions_view.flux, name='flux'),
-    path("my_post" , actions_view.my_post, name='my_post'),
+    path("deconnexion/", auth_view.deconnexion, name="deconnexion"),
+    path("search_user/", actions_view.search_user),
+    path("follow/<str:username>/", actions_view.follow_user, name="follow_user"),
+    path("unfollow/<str:username>/", actions_view.unfollow_user, name="unfollow_user"),
+    path("flux", actions_view.flux, name="flux"),
+    path("my_post", actions_view.my_post, name="my_post"),
 ]

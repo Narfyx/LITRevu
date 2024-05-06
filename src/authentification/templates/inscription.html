@@ -1,22 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<div class="inscription">
+  <h2>Inscrivez-vous maintenant</h2>
 
-{% extends 'base.html' %}
-
-{% block content %}
-    <div class="inscription">
-        <h2>Inscrivez-vous maintenant</h2>
-            
-        <form method="post" action="{% url 'inscription' %}"> 
-            {% csrf_token %}
-            <button type="submit" class="button">S'inscrire</button>
-            {{ form.as_p}}
-                
-        </form>
-    </div>
-    <div class="login">
-        <h2>Connectez-vous</h2>
-        <a href="{% url 'connexion' %}">
-            <button type="submit" class="button">Se connecter</button>
-        </a>
-    </div>
+  <form method="post" action="{% url 'inscription' %}">
+    {% csrf_token %}
+    <button type="submit" class="button">S'inscrire</button>
+    {{ form.as_p}}
+  </form>
+</div>
+<div class="login">
+  <h2>Connectez-vous</h2>
+  <a href="{% url 'connexion' %}">
+    <button type="submit" class="button">Se connecter</button>
+  </a>
+</div>
 {% endblock %}
-
