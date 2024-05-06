@@ -1,82 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <head>
     <title>LITReview</title>
     <!DOCTYPE html>
     <html lang="fr">
     <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 0;
-            margin: 0;
-        }
-        .container {
-            width: 95%;
-            position: fixed;
-            margin: 0.5%;
-            border: 1px solid #000;
-            padding: 20px;
-        }
-        hr {
-            border: none;
-            border-top: 2px solid #000;
-            color: #333;
-            overflow: visible;
-            text-align: center;
-            height: 5px;
-        }
-        hr::after {
-            background: #fff;
-            padding: 0 4px;
-            position: relative;
-            top: -13px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .content {
-            display: flex;
-            align-items: stretch; /* S'assure que les enfants s'étirent à la même hauteur */
-            justify-content: center;
-        }
-
-        .login, .inscription {
-            position: static;
-            display:inline-table;
-            text-align: left;
-            width: 350px;
-            height: 300px;
-            margin: 5px;
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin: 10px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            border-radius: 5px;
-        }
-        .button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 20px;
-        }
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-        .error {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'authentification/styles.css' %}">
 </head>
 <body>
     <div class="container">
@@ -100,4 +29,4 @@
         <div class="clearfix"></div>
     </div>
 </body>
-</html>
+</html> 

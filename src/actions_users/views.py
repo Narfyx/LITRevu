@@ -86,5 +86,15 @@ def unfollow_user(request, username):
 
     return redirect('user_follow')
 
+@login_required
+def flux(request):
+    return render(request, 'flux.html')
+
+
+@login_required
+def my_post(request):
+    return render(request, 'user_create_ticket.html')
+
+
 
     

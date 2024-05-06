@@ -1,55 +1,10 @@
 {% extends 'user_actions_base.html' %}
 
 {% block content %}
+{% load static %}
   <head>
     <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"/>
-    <style>
-      .section {
-        margin-bottom: 20px;
-      }
-      .subscription-section {
-        justify-content: space-between;
-      }
-      .subscription-list {
-        width: 48%;
-        float: left;
-      }
-      button[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        padding: 9px 0px;
-        margin: 5px 5px;
-        border: none;
-        cursor: pointer;
-        width: 30%;
-        border-radius: 20px;
-      }
-      input[type="text"]{
-        padding: 8px;
-        width: 47.2%;
-        border-radius: 5px;
-        text-indent: 35px;
-      }
-      .subscription-list > ul > li > form > button {
-        float: right;
-        margin-top: -6px;
-        margin-right: 15%;
-      }
-      .follower-hr {
-        border: none;
-        border-top: 1px solid #333;
-        margin-top: 15px;
-        overflow: visible;
-        text-align: left;
-        height: 5px;
-        width: 85%;
-        margin-right: 40%;
-        opacity: 20%;
-      }
-      li {
-        list-style-type: none;
-      }
-    </style>
+    <link rel="stylesheet" href="{% static 'actions_users/user_follow.css' %}">
   </head>
   <div class="section">
     <div class="section">

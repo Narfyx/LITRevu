@@ -23,7 +23,6 @@ from actions_users import views as actions_view
 from .views import index
 
 urlpatterns = [
-    
     path("admin/", admin.site.urls),
     path("", auth_view.connexion, name="connexion"),
     path("inscription/", auth_view.inscription, name="inscription"),
@@ -32,4 +31,6 @@ urlpatterns = [
     path('search_user/', actions_view.search_user),
     path('follow/<str:username>/', actions_view.follow_user, name='follow_user'),
     path('unfollow/<str:username>/', actions_view.unfollow_user, name='unfollow_user'),
+    path("flux" , actions_view.flux, name='flux'),
+    path("my_post" , actions_view.my_post, name='my_post'),
 ]
