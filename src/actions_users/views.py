@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
+from .forms import TicketForm
 from .models import UserFollows
 
 
@@ -100,4 +101,12 @@ def flux(request):
 
 @login_required
 def my_post(request):
-    return render(request, "user_create_ticket.html")
+    ticket_form = TicketForm()
+    if request.method == "POST":
+        ticket_form = TicketForm(request.POST, request.FILES)
+        if ticket_form.is_valid():
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+        return redirect("user_follow")
+    return render(request, "user_create_ticket.html", {"ticket_form": ticket_form})
