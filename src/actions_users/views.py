@@ -101,6 +101,11 @@ def flux(request):
 
 @login_required
 def my_post(request):
+    return render(request, "my_post.html")
+
+
+@login_required
+def create_ticket(request):
     ticket_form = TicketForm()
     if request.method == "POST":
         ticket_form = TicketForm(request.POST, request.FILES)
@@ -108,5 +113,5 @@ def my_post(request):
             ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.save()
-        return redirect("user_follow")
+        return redirect("my_post")
     return render(request, "user_create_ticket.html", {"ticket_form": ticket_form})

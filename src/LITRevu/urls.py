@@ -34,4 +34,5 @@ urlpatterns = [
     path("unfollow/<str:username>/", actions_view.unfollow_user, name="unfollow_user"),
     path("flux", actions_view.flux, name="flux"),
     path("my_post", actions_view.my_post, name="my_post"),
+    path("create_ticket", actions_view.create_ticket, name="create_ticket"),
 ]

@@ -1,0 +1,33 @@
+{% extends 'user_actions_base.html' %} {% block content %}
+<head>
+  <style>
+    .main {
+      display: flex;
+      flex-direction: column; /* Change flex direction to column */
+      align-items: center;
+      justify-content: center;
+    }
+    .main > a {
+      z-index: 1; /* Change z-index to 1 to make it above the default stacking context */
+      background-color: #4caf50;
+      color: white;
+      padding: 1%;
+      border: none;
+      cursor: pointer;
+      width: 10%;
+      min-width: 120px; /* Add a min-width to ensure button is not too small */
+      border-radius: 20px;
+      text-align: center; /* Center text within the button */
+      text-decoration: none; /* Remove underline from the link */
+      display: block; /* Make the link block to align text inside it properly */
+    }
+    h2 {
+      margin: 0 0 20px 0; /* Add some margin below the h2 for spacing */
+    }
+  </style>
+</head>
+<div class="main">
+  <h2>Mes Posts</h2>
+  <a href="{% url 'create_ticket' %}" class="button-nav">Créer un ticket</a>
+</div>
+{% endblock %}

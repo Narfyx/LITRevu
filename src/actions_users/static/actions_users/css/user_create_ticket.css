@@ -3,3 +3,48 @@ body {
   padding: 0;
   margin: 0;
 }
+label[for="id_title"],
+label[for="id_description"],
+label[for="id_image"] {
+  font-weight: bold;
+  font-size: large;
+  padding-left: 10%;
+}
+button[class="btn btn-primary"] {
+  margin-left: 10%;
+  margin-top: 2%;
+  background-color: #4caf50;
+  color: white;
+  padding: 1%;
+  border: none;
+  cursor: pointer;
+  width: 10%;
+  border-radius: 20px;
+}
+textarea[id="id_description"],
+input[id="id_title"],
+input[id="id_image"] {
+  display: flex;
+  margin-left: 10%;
+  margin-top: 0.3%;
+}
+input[id="id_title"] {
+  width: 332px;
+  padding: 2px 2px;
+}
+textarea[id="id_description"] {
+  height: 40em;
+  width: 350px;
+}
+.charCount {
+  position: fixed;
+  margin-left: 32.5%;
+  padding: 1px 10px;
+  opacity: 0.5;
+  font-size: 0.9em;
+  text-align: right;
+  color: #555;
+}
+form[method="post"] > div {
+  margin-top: 15px;
+}
