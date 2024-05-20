@@ -10,15 +10,15 @@ from authentification.models import Utilisateur
 class UserFollows(models.Model):
     # L'utilisateur qui suit
     user = models.ForeignKey(
-        User,  # Référence au modèle utilisateur personnalisé
+        to=settings.AUTH_USER_MODEL,  # Référence au modèle utilisateur personnalisé
         related_name="following",  # Facilite l'accès aux utilisateurs suivis par cet utilisateur
         on_delete=models.CASCADE,  # Si l'utilisateur est supprimé, ses relations de suivi sont également supprimées
     )
     # L'utilisateur qui est suivi
     followed_user = models.ForeignKey(
-        User,  # Référence au même modèle utilisateur
-        related_name="followers",  # Facilite l'accès aux utilisateurs qui suivent cet utilisateur
-        on_delete=models.CASCADE,  # Si l'utilisateur suivi est supprimé, cette relation de suivi est également supprimée
+        to=settings.AUTH_USER_MODEL,
+        related_name="followers",
+        on_delete=models.CASCADE,
     )
 
     class Meta:
@@ -30,23 +30,30 @@ class UserFollows(models.Model):
         return f"{self.user.username} follows {self.followed_user.username}"
 
 
-class Ticket(models.Model):
-
-    IMAGE_MAX_SIZE = (2000, 2000)
-
-    title = models.CharField(max_length=96)
-    description = models.TextField(max_length=2048, blank=True)
-    image = models.ImageField(null=True, blank=True)
+class BasePost(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
-
     user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    def resize_image(self):
-        if self.image:
-            image = Image.open(self.image)
-            image.thumbnail(self.IMAGE_MAX_SIZE)
-            image.save(self.image.path)
+    class Meta:
+        abstract = True
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.resize_image()
+
+class Ticket(BasePost):
+    title = models.CharField(max_length=128)
+    description = models.TextField(max_length=2048, blank=True)
+    image = models.ImageField(blank=True, null=True)
+
+
+class Review(BasePost):
+    headline = models.CharField(max_length=128, null=True, blank=True)
+    body = models.TextField(
+        max_length=8192, null=True, blank=True
+    )  # Body peut être vide
+
+    ticket = models.ForeignKey(
+        to=Ticket, on_delete=models.CASCADE
+    )  # Lien vers le ticket associé
+    rating = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(5)]
+    )
+    # Note attribuée, entre 0 et 5

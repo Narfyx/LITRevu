@@ -1,13 +1,12 @@
 .section {
   margin-bottom: 20px;
 }
-.subscription-section {
-  justify-content: space-between;
-}
+
 .subscription-list {
   width: 48%;
   float: left;
 }
+
 button[type="submit"] {
   background-color: #4caf50;
   color: white;
@@ -18,17 +17,20 @@ button[type="submit"] {
   width: 30%;
   border-radius: 20px;
 }
+
 input[type="text"] {
   padding: 8px;
   width: 47.2%;
   border-radius: 5px;
   text-indent: 35px;
 }
+
 .subscription-list > ul > li > form > button {
   float: right;
   margin-top: -6px;
   margin-right: 15%;
 }
+
 .follower-hr {
   border: none;
   border-top: 1px solid #333;
@@ -40,6 +42,11 @@ input[type="text"] {
   margin-right: 40%;
   opacity: 20%;
 }
+
 li {
   list-style-type: none;
+}
+
+.clear {
+  clear: both;
 }

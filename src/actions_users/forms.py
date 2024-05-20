@@ -1,6 +1,6 @@
 from django import forms
 
-from . import models
+from .models import Review, Ticket
 
 
 class SearchUserForm(forms.Form):
@@ -8,15 +8,24 @@ class SearchUserForm(forms.Form):
 
 
 class TicketForm(forms.ModelForm):
-
-    edit_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
-
     class Meta:
-        model = models.Ticket
+        model = Ticket
         fields = ["title", "description", "image"]
-        labels = {"title": "Titre"}
 
 
-class DeleteTicketForm(forms.Form):
-
-    delete_ticket = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ["headline", "rating", "body"]
+        widgets = {
+            "rating": forms.RadioSelect(
+                choices=[
+                    (0, " -0"),
+                    (1, " -1"),
+                    (2, " -2"),
+                    (3, " -3"),
+                    (4, " -4"),
+                    (5, " -5"),
+                ],
+            )
+        }

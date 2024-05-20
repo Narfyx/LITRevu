@@ -14,7 +14,10 @@
     <div class="container">
       <div class="header">
         <h2 class="username">Connecté en tant que: {{ user.username }}</h2>
-        <h1>LITReview</h1>
+        <div>
+          <h1>LITReview</h1>
+        </div>
+
         <nav>
           <a href="{% url 'flux' %}" class="button-nav">Flux</a> |
           <a href="{% url 'my_post' %}" class="button-nav">Mes Posts</a> |
