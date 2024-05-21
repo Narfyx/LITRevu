@@ -1,0 +1,17 @@
+{% extends 'user_actions_base.html' %} {% block content %} {% load static %}
+<head>
+  <link
+    rel="stylesheet"
+    href="{% static 'actions_users/css/user_create_post.css' %}"
+  />
+</head>
+<body>
+  <h2>Modifier le ticket</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {{ edit_form.errors }} {{ edit_form }} {% csrf_token %}
+    <button type="submit" class="btn-sub">Enregistrer les modifications</button>
+    <script src="{% static 'actions_users/js/character.js' %}"></script>
+  </form>
+</body>
+{% endblock %}

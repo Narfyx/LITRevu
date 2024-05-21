@@ -17,4 +17,9 @@
     <a href="{% url 'create_review' ticket_id=post.id %}" class="buttons">Créer une critique</a>
   </div>
   {% endif %}
+  {% if request.path == "/my_post" and user == post.user %}
+  <div class="post-footer">
+    <a href="{% url 'ticket_edit' ticket_id=post.id %}" class="buttons">Modifier le ticket</a>
+  </div>
+  {% endif %}
 </div>

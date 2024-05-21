@@ -8,6 +8,7 @@ class SearchUserForm(forms.Form):
 
 
 class TicketForm(forms.ModelForm):
+
     class Meta:
         model = Ticket
         fields = ["title", "description", "image"]

@@ -49,26 +49,28 @@ def search_user(request):
 
     return JsonResponse({"status": 200, "data": users_list})
 
-
 @login_required
 def follow_user(request, username):
     user = request.user
-    user_to_follow = get_object_or_404(User, username=username)
 
-    if user.username == user_to_follow.username:
-        messages.error(request, "Vous ne pouvez pas vous suivre vous-même.")
-        return redirect("user_follow")
+    try:
+        user_to_follow = User.objects.get(username=username)
+        
+        if user.username == user_to_follow.username:
+            messages.error(request, "Vous ne pouvez pas vous suivre vous-même.")
+            return redirect("user_follow")
+        
+        _, created = UserFollows.objects.get_or_create(
+            user=user, followed_user=user_to_follow
+        )
 
-    _, created = UserFollows.objects.get_or_create(
-        user=user, followed_user=user_to_follow
-    )
-    # _ = instance de UserFollows
-
-    if created:
-        messages.success(request, f"Vous suivez maintenant {user_to_follow.username}.")
-    else:
-        messages.info(request, f"Vous suivez déjà {user_to_follow.username}.")
-
+        if created:
+            messages.success(request, f"Vous suivez maintenant {user_to_follow.username}.")
+        else:
+            messages.info(request, f"Vous suivez déjà {user_to_follow.username}.")
+    except User.DoesNotExist:
+        messages.error(request, "Cet utilisateur n'existe pas")
+    
     return redirect("user_follow")
 
 
@@ -102,20 +104,13 @@ def unfollow_user(request, username):
 def flux(request):
     user = request.user
     
-    # Récupère tous les utilisateurs que l'utilisateur connecté suit
     following = UserFollows.objects.filter(user=user)
     followed_users = [follow.followed_user for follow in following]
-    
-    # Ajoute l'utilisateur connecté à la liste des utilisateurs suivis
     followed_users.append(user)
     
-    # Subquery pour compter les reviews de l'utilisateur connecté pour chaque ticket
     user_review_count = Review.objects.filter(ticket=OuterRef('pk'), user=user).values('ticket').annotate(count=Count('id')).values('count')
     
-    # Récupère les tickets des utilisateurs suivis ainsi que ceux de l'utilisateur connecté
     tickets = Ticket.objects.filter(user__in=followed_users).annotate(user_review_count=Subquery(user_review_count))
-    
-    # Récupère les reviews des utilisateurs suivis ainsi que ceux de l'utilisateur connecté
     reviews = Review.objects.filter(user__in=followed_users)
     
     # Combine et trie les tickets et les reviews par date de création
@@ -133,8 +128,12 @@ def flux(request):
 def my_post(request):
     user = request.user
 
-    tickets = Ticket.objects.filter(user=user)
+    user_review_count = Review.objects.filter(ticket=OuterRef('pk'), user=user).values('ticket').annotate(count=Count('id')).values('count')
+
+    tickets = Ticket.objects.filter(user=user).annotate(user_review_count=Subquery(user_review_count))
     reviews = Review.objects.filter(user=user)
+    
+
     posts = sorted(
         chain(tickets, reviews), key=lambda post: post.time_created, reverse=True
     )
@@ -158,7 +157,7 @@ def create_ticket(request):
     return render(request, "user_create_ticket.html", {"ticket_form": ticket_form})
 
 
-login_required
+@login_required
 def create_review(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
     
@@ -197,3 +196,18 @@ def create_ticket_and_review(request):
 
     context = {"review_form": review_form, "ticket_form": ticket_form}
     return render(request, "user_create_ticket_and_review.html", context=context)
+
+
+@login_required
+def ticket_edit(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+
+    if request.method == "POST":
+        edit_form = TicketForm(request.POST, request.FILES, instance=ticket)
+        if edit_form.is_valid():
+            edit_form.save()
+            return redirect("my_post")
+    else:
+        edit_form = TicketForm(instance=ticket)
+
+    return render(request, "user_edit_ticket.html", {"edit_form": edit_form})
