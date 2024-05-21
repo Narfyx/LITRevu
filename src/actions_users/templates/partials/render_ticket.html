@@ -1,0 +1,20 @@
+<div class="post">
+  <div class="post-header">
+    <h3>{{ post.user.username }} a demandé une critique</h3>
+    <span class="post-date">{{ post.time_created|date:"H:i, d F Y" }}</span>
+  </div>
+  <h4 class="post-title">{{ post.title }}</h4>
+  {% if post.description %}
+  <p class="post-description">{{ post.description }}</p>
+  {% endif %}
+  {% if post.image %}
+  <div class="post-image">
+    <img src="{{ post.image.url }}" alt="Image for {{ post.title }}" />
+  </div>
+  {% endif %}
+  {% if post.user_review_count|default:0 == 0 %}
+  <div class="post-footer">
+    <a href="{% url 'create_review' ticket_id=post.id %}" class="buttons">Créer une critique</a>
+  </div>
+  {% endif %}
+</div>

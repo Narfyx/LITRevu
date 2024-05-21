@@ -4,28 +4,6 @@
 </head>
 <body>
   <h2 class="title">Flux</h2>
-  <div class="buttons-container">
-    <a href="{% url 'create_ticket' %}">Demander une critique</a>
-    <a href="{% url 'create_ticket_and_review' %}">Créer une critique</a>
-  </div>
-  <div class="content-wrapper">
-    {% for post in posts %}
-    <div class="post">
-      <div class="post-header">
-        <h3>{{ post.user.username }} a demandé une critique</h3>
-        <span class="post-date">{{ post.time_created|date:"H:i, d F Y" }}</span>
-      </div>
-      <h4 class="post-title">{{ post.title }}</h4>
-      {% if post.description %}
-      <p class="post-description">{{ post.description }}</p>
-      {% endif %} {% if post.image %}
-      <div class="post-image">
-        <img src="{{ post.image.url }}" alt="Image for {{ post.title }}" />
-      </div>
-      {% endif %}
-      <a href="{% url 'create_review' %}">Créer une critique</a>
-    </div>
-    {% endfor %}
-  </div>
+  {% include 'partials/render_flux.html' with post=post %}
 </body>
 {% endblock %}

@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.db.models import Count
+from django.db.models import Count, OuterRef, Subquery, Q
 
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket, UserFollows
@@ -99,26 +101,31 @@ def unfollow_user(request, username):
 @login_required
 def flux(request):
     user = request.user
-
+    
     # Récupère tous les utilisateurs que l'utilisateur connecté suit
     following = UserFollows.objects.filter(user=user)
     followed_users = [follow.followed_user for follow in following]
-
+    
     # Ajoute l'utilisateur connecté à la liste des utilisateurs suivis
     followed_users.append(user)
-
+    
+    # Subquery pour compter les reviews de l'utilisateur connecté pour chaque ticket
+    user_review_count = Review.objects.filter(ticket=OuterRef('pk'), user=user).values('ticket').annotate(count=Count('id')).values('count')
+    
     # Récupère les tickets des utilisateurs suivis ainsi que ceux de l'utilisateur connecté
-    tickets = Ticket.objects.filter(user__in=followed_users)
-
+    tickets = Ticket.objects.filter(user__in=followed_users).annotate(user_review_count=Subquery(user_review_count))
+    
     # Récupère les reviews des utilisateurs suivis ainsi que ceux de l'utilisateur connecté
     reviews = Review.objects.filter(user__in=followed_users)
-
+    
     # Combine et trie les tickets et les reviews par date de création
     posts = sorted(
         list(tickets) + list(reviews), key=lambda post: post.time_created, reverse=True
     )
-
-    context = {"posts": posts}
+    
+    context = {
+        'posts': posts
+    }
     return render(request, "flux.html", context)
 
 
@@ -151,19 +158,22 @@ def create_ticket(request):
     return render(request, "user_create_ticket.html", {"ticket_form": ticket_form})
 
 
-@login_required
-def create_review(request):
+login_required
+def create_review(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    
     if request.method == "POST":
         review_form = ReviewForm(request.POST, request.FILES)
-        if ticket_form.is_valid():
-            review = ticket_form.save(commit=False)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
             review.user = request.user
+            review.ticket = ticket  # Associer le ticket à la revue
             review.save()
             return redirect("my_post")
     else:
         review_form = ReviewForm()
-    return render(request, "user_create_review.html", {"review_form": review_form})
-
+    
+    return render(request, "user_create_review.html", {"review_form": review_form, "ticket": ticket})
 
 @login_required
 def create_ticket_and_review(request):

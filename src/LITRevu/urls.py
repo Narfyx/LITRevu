@@ -43,6 +43,7 @@ urlpatterns = [
         name="create_ticket_and_review",
     ),
     path("create_review", actions_view.create_review, name="create_review"),
+    path('create_review/<int:ticket_id>/', actions_view.create_review, name='create_review'),
 ]
 
 if settings.DEBUG:

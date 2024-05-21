@@ -19,6 +19,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  background-color: #f9f9f9;
 }
 
 .post-header {
@@ -49,23 +50,25 @@ body {
 .post-image {
   margin-top: 10px;
 }
+
 img {
-  max-width: 500px; /* Par exemple, pour une largeur maximale de 500px */
-  max-height: 300px; /* Par exemple, pour une hauteur maximale de 300px */
-  object-fit: contain; /* Pour contenir l'image dans la taille définie, en conservant le ratio */
+  max-width: 500px;
+  max-height: 300px;
+  object-fit: contain;
 }
+
 .buttons-container {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  justify-content: center; /* Center buttons horizontally */
-  width: 100%; /* Ensure the container takes full width */
+  justify-content: center;
+  width: 100%;
 }
-body > .buttons-container > a {
-  z-index: 1;
+
+.buttons {
   background-color: #4caf50;
   color: white;
-  padding: 1%;
+  padding: 10px;
   margin: 1px;
   font-size: medium;
   border: none;
@@ -77,8 +80,12 @@ body > .buttons-container > a {
   text-decoration: none;
   display: block;
 }
+
+.post-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
 .title {
-  margin: 0 0 20px 0;
-  text-align: center; /* Center the heading text */
-  width: 100%; /* Ensure the heading takes full width */
+  text-align: center;
 }

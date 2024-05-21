@@ -1,0 +1,17 @@
+<div class="buttons-container">
+    <a href="{% url 'create_ticket' %}" class="buttons"
+      >Demander une critique</a
+    >
+    <a href="{% url 'create_ticket_and_review' %}" class="buttons"
+      >Créer une critique</a
+    >
+  </div>
+  <div class="content-wrapper">
+    {% for post in posts %}
+      {% if post.title %}
+        {% include 'partials/render_ticket.html' with post=post %}
+      {% elif post.headline %}
+        {% include 'partials/render_review.html' with post=post %}
+      {% endif %}
+    {% endfor %} 
+  </div>
