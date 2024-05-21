@@ -225,3 +225,23 @@ def edit_review(request, review_id):
         review_form = ReviewForm(instance=review)
 
     return render(request, "user_edit_review.html", {"review_form": review_form})
+
+@login_required
+def delete_ticket(request, ticket_id):
+    ticket = get_object_or_404(Ticket, id=ticket_id)
+    if request.user == ticket.user:
+        ticket.delete()
+        messages.success(request, "Le ticket a été supprimé avec succès.")
+    else:
+        messages.error(request, "Vous n'avez pas la permission de supprimer ce ticket.")
+    return redirect("my_post")
+
+@login_required
+def delete_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+    if request.user == review.user:
+        review.delete()
+        messages.success(request, "La critique a été supprimée avec succès.")
+    else:
+        messages.error(request, "Vous n'avez pas la permission de supprimer cette critique.")
+    return redirect("my_post")

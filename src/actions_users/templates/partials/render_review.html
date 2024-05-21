@@ -22,6 +22,7 @@
   {% if request.path == "/my_post" and user == post.user %}
   <div class="post-footer">
     <a href="{% url 'edit_review' review_id=post.id %}" class="buttons">Modifier la critique</a>
+    <a href="{% url 'delete_review' review_id=post.id %}" class="buttons" onclick="return confirm('Voulez-vous vraiment supprimer cette critique ?');">Supprimer la critique</a>
   </div>
   {% endif %}
 </div>

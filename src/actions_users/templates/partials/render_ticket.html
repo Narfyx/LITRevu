@@ -1,13 +1,8 @@
 <div class="post">
   <div class="post-header">
-    {% if user == post.user %}
-    <h3>Vous avez demandé une critique</h3>
-    {% else %}
     <h3>{{ post.user.username }} a demandé une critique</h3>
-    {% endif %}
     <span class="post-date">{{ post.time_created|date:"H:i, d F Y" }}</span>
   </div>
-
   <h4 class="post-title">{{ post.title }}</h4>
   {% if post.description %}
   <p class="post-description">{{ post.description }}</p>
@@ -17,7 +12,7 @@
     <img src="{{ post.image.url }}" alt="Image for {{ post.title }}" />
   </div>
   {% endif %}
-  {% if post.user_review_count|default:0 == 0 %}
+  {% if post.user_review_count|default:0 == 0 and request.path == "/flux" %}
   <div class="post-footer">
     <a href="{% url 'create_review' ticket_id=post.id %}" class="buttons">Créer une critique</a>
   </div>
@@ -25,6 +20,7 @@
   {% if request.path == "/my_post" and user == post.user %}
   <div class="post-footer">
     <a href="{% url 'ticket_edit' ticket_id=post.id %}" class="buttons">Modifier le ticket</a>
+    <a href="{% url 'delete_ticket' ticket_id=post.id %}" class="buttons" onclick="return confirm('Voulez-vous vraiment supprimer ce ticket ?');">Supprimer le ticket</a>
   </div>
   {% endif %}
 </div>
