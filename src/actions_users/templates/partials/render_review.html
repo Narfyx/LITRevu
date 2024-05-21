@@ -1,20 +1,27 @@
 <div class="post">
-    <div class="post-header">
-      <h3>{{ post.user.username }} a créer une critique</h3>
-      <span class="post-date">{{ post.time_created|date:"H:i, d F Y" }}</span>
-    </div>
-
-    <div>
-        <h4 class="post-title">{{ post.headline }}</h4>
-        {% if post.rating %}
-        <p class="post-rating">{{ post.rating }}</p>
-        {% endif %}
-        {% if post.body %}
-        <p class="post-description">{{ post.body }}</p>
-        {% endif %}
-    </div>
-    <div>
-      {% include 'partials/render_ticket_card_format.html' with post=post.ticket %}
-    </div>
+  <div class="post-header">
+    {% if user == post.user %}
+    <h3>Vous avez créé une critique</h3>
+    {% else %}
+    <h3>{{ post.user.username }} a créé une critique</h3>
+    {% endif %}
+    <span class="post-date">{{ post.time_created|date:"H:i, d F Y" }}</span>
   </div>
-  
+  <div>
+    <h4 class="post-title">{{ post.headline }}</h4>
+    {% if post.rating %}
+    <p class="post-rating">{{ post.rating }}</p>
+    {% endif %}
+    {% if post.body %}
+    <p class="post-description">{{ post.body }}</p>
+    {% endif %}
+  </div>
+  <div>
+    {% include 'partials/render_ticket_card_format.html' with post=post.ticket %}
+  </div>
+  {% if request.path == "/my_post" and user == post.user %}
+  <div class="post-footer">
+    <a href="{% url 'edit_review' review_id=post.id %}" class="buttons">Modifier la critique</a>
+  </div>
+  {% endif %}
+</div>

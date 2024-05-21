@@ -211,3 +211,17 @@ def ticket_edit(request, ticket_id):
         edit_form = TicketForm(instance=ticket)
 
     return render(request, "user_edit_ticket.html", {"edit_form": edit_form})
+
+@login_required
+def edit_review(request, review_id):
+    review = get_object_or_404(Review, id=review_id)
+
+    if request.method == "POST":
+        review_form = ReviewForm(request.POST, request.FILES, instance=review)
+        if review_form.is_valid():
+            review_form.save()
+            return redirect("my_post")
+    else:
+        review_form = ReviewForm(instance=review)
+
+    return render(request, "user_edit_review.html", {"review_form": review_form})
