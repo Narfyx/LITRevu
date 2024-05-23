@@ -1,10 +1,10 @@
 from django.conf import settings
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from PIL import Image
 
-from authentification.models import Utilisateur
+from authentification.models import User
 
 
 class UserFollows(models.Model):
@@ -24,6 +24,8 @@ class UserFollows(models.Model):
     class Meta:
         # Assure que chaque paire utilisateur-utilisateur suivi est unique
         unique_together = ("user", "followed_user")
+        verbose_name = "User follow"  # correction bug dans l'interface django admin pour corriger le "User followss"
+        verbose_name_plural = "User follows"  # correction bug dans l'interface django admin pour corriger le "User followss"
 
     def __str__(self):
         # Représentation en chaîne de caractères de l'objet

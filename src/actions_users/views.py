@@ -2,7 +2,7 @@ from itertools import chain
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import Count
@@ -10,7 +10,7 @@ from django.db.models import Count, OuterRef, Subquery, Q
 
 from .forms import ReviewForm, TicketForm
 from .models import Review, Ticket, UserFollows
-
+from authentification.models import User
 
 @login_required
 def user_follow(request):
