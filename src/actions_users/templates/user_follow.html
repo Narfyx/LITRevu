@@ -1,69 +1,57 @@
 {% extends 'user_actions_base.html' %} {% block content %} {% load static %}
 <head>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css"
-  />
-  <link
-    rel="stylesheet"
-    href="{% static 'actions_users/css/user_follow.css' %}"
-  />
+  <link rel="stylesheet" href="https://unpkg.com/@trevoreyre/autocomplete-js/dist/style.css" />
+  <link rel="stylesheet" href="{% static 'actions_users/css/user_follow.css' %}" />
 </head>
-<body>
-  <div>
-    <h2>Suivre d'autres utilisateurs</h2>
-    <form method="POST" action="/follow/" id="userForm">
-      {% csrf_token %}
-      <div id="autocomplete" class="autocomplete">
-        <input
-          class="autocomplete-input"
-          type="text"
-          name="search_query"
-          placeholder="Nom d'utilisateur"
-        />
-        <ul class="autocomplete-result-list"></ul>
-        <button type="submit">Suivre</button>
-      </div>
-      <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
-      <script src="{% static 'actions_users/js/search_user.js' %}"></script>
-    </form>
+<div>
+  <h2>Suivre d'autres utilisateurs</h2>
+  <form method="POST" action="/follow/" id="userForm">
+    {% csrf_token %}
+    <div id="autocomplete" class="autocomplete">
+      <label for="search_query">
+      <input id="search_query" class="autocomplete-input" type="text" name="search_query" placeholder="Nom d'utilisateur" /></label>
+      <ul class="autocomplete-result-list"></ul>
+      <button type="submit">Suivre</button>
+    </div>
+    <script src="https://unpkg.com/@trevoreyre/autocomplete-js"></script>
+    <script src="{% static 'actions_users/js/search_user.js' %}"></script>
+  </form>
 
-    <div class="subscription-list">
-      <h2>Abonnements</h2>
-      <ul>
-        {% for user in followed_users %}
-        <li>
-          <form action="{% url 'unfollow_user' user.username %}" method="POST">
-            {% csrf_token %} - {{ user.username }}
-            <button type="submit">Ne plus suivre</button>
-          </form>
-        </li>
-        <hr class="follower-hr" />
-        {% empty %}
-        <li>Vous ne suivez actuellement personne.</li>
-        {% endfor %}
-      </ul>
-      {% if messages %}
-      <div class="error-messages">
-        {% for message in messages %}
-        <p class="error">{{ message }}</p>
-        {% endfor %}
-      </div>
-      {% endif %}
+  <section class="subscription-list">
+    <h2>Abonnements</h2>
+    <ul>
+      {% for user in followed_users %}
+      <li>
+        <form action="{% url 'unfollow_user' user.username %}" method="POST">
+          {% csrf_token %} - {{ user.username }}
+          <button type="submit">Ne plus suivre</button>
+        </form>
+      </li>
+      <hr class="follower-hr" />
+      {% empty %}
+      <li>Vous ne suivez actuellement personne.</li>
+      {% endfor %}
+    </ul>
+    {% if messages %}
+    <div class="error-messages" role="alert">
+      {% for message in messages %}
+      <p class="error">{{ message }}</p>
+      {% endfor %}
     </div>
-    <div class="subscription-list">
-      <h2>Abonnés</h2>
-      <ul>
-        {% for user in followers %}
-        <li>- {{ user.username }}</li>
-        <hr class="follower-hr" />
-        {% empty %}
-        <li>Aucun utilisateur ne vous suit actuellement.</li>
-        {% endfor %}
-      </ul>
-    </div>
-    <div class="clear"></div>
-    <!-- Élément de vidage -->
-  </div>
-</body>
+    {% endif %}
+  </section>
+
+  <section class="subscription-list">
+    <h2>Abonnés</h2>
+    <ul>
+      {% for user in followers %}
+      <li>- {{ user.username }}</li>
+      <hr class="follower-hr" />
+      {% empty %}
+      <li>Aucun utilisateur ne vous suit actuellement.</li>
+      {% endfor %}
+    </ul>
+  </section>
+  <div class="clear"></div>
+</div>
 {% endblock %}

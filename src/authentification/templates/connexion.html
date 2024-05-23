@@ -1,11 +1,14 @@
-{% extends 'base.html' %} {% block content %}
-<div class="inscription">
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="inscription">
   <h2>Inscrivez-vous maintenant</h2>
   <a href="{% url 'inscription' %}">
-    <button type="submit" class="button">S'inscrire</button>
+    <button class="button">S'inscrire</button>
   </a>
-</div>
-<div class="login">
+</section>
+
+<section class="login">
   <h2>Connectez-vous</h2>
   <form method="post" action="{% url 'connexion' %}">
     {% csrf_token %}
@@ -18,6 +21,7 @@
       <label for="psw">Mot de passe</label>
       <input type="password" id="psw" name="password" required />
     </div>
+    
   </form>
-</div>
+</section>
 {% endblock %}

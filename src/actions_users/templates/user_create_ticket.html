@@ -1,18 +1,17 @@
-{% extends 'user_actions_base.html' %} {% block content %} {% load static %}
-<head>
-  <link
-    rel="stylesheet"
-    href="{% static 'actions_users/css/user_create_post.css' %}"
-  />
-</head>
-<body>
-  <h2>Créer un ticket</h2>
+{% extends 'user_actions_base.html' %} 
+{% load static %} 
 
-  <form method="post" enctype="multipart/form-data">
-    <!-- Ce qui m'avait bloqué auj enctype="multipart/form-data-->
-    {{ ticket_form.errors }} {{ ticket_form }} {% csrf_token %}
-    <button type="submit" class="btn-sub">Envoyer</button>
-    <script src="{% static 'actions_users/js/character.js' %}"></script>
-  </form>
-</body>
+{% block content %} 
+<link rel="stylesheet" href="{% static 'actions_users/css/user_create_post.css' %}"/>
+
+<h2>Créer un ticket</h2>
+
+<form method="post" enctype="multipart/form-data">
+  {{ ticket_form.errors }} 
+  {{ ticket_form }} 
+  {% csrf_token %}
+  <button type="submit" class="btn-sub">Envoyer</button>
+</form>
+
+<script src="{% static 'actions_users/js/character.js' %}"></script>
 {% endblock %}

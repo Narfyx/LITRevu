@@ -18,12 +18,10 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
 
 from actions_users import views as actions_view
 from authentification import views as auth_view
-
-from .views import index
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -42,12 +40,24 @@ urlpatterns = [
         name="create_ticket_and_review",
     ),
     path("create_review", actions_view.create_review, name="create_review"),
-    path('create_review/<int:ticket_id>/', actions_view.create_review, name='create_review'),
-    path('follow/', actions_view.user_follow, name='user_follow'),
-    path('edit_ticket/<int:ticket_id>/', actions_view.ticket_edit, name='ticket_edit'),
-    path('edit_review/<int:review_id>/', actions_view.edit_review, name='edit_review'),
-    path('delete_review/<int:review_id>/', actions_view.delete_review, name='delete_review'),
-    path('delete_ticket/<int:ticket_id>/', actions_view.delete_ticket, name='delete_ticket'),
+    path(
+        "create_review/<int:ticket_id>/",
+        actions_view.create_review,
+        name="create_review",
+    ),
+    path("follow/", actions_view.user_follow, name="user_follow"),
+    path("edit_ticket/<int:ticket_id>/", actions_view.ticket_edit, name="ticket_edit"),
+    path("edit_review/<int:review_id>/", actions_view.edit_review, name="edit_review"),
+    path(
+        "delete_review/<int:review_id>/",
+        actions_view.delete_review,
+        name="delete_review",
+    ),
+    path(
+        "delete_ticket/<int:ticket_id>/",
+        actions_view.delete_ticket,
+        name="delete_ticket",
+    ),
 ]
 
 if settings.DEBUG:

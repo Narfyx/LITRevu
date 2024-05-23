@@ -5,32 +5,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LITReview Subscriptions</title>
-    <link
-      rel="stylesheet"
-      href="{% static 'actions_users/css/users_actions.css' %}"
-    />
+    <link rel="stylesheet" href="{% static 'actions_users/css/users_actions.css' %}" />
   </head>
   <body>
     <div class="container">
-      <div class="header">
+      <header class="header">
         <h2 class="username">Connecté en tant que: {{ user.username }}</h2>
         <div>
           <h1>LITReview</h1>
         </div>
-
         <nav>
           <a href="{% url 'flux' %}" class="button-nav">Flux</a> |
           <a href="{% url 'my_post' %}" class="button-nav">Mes Posts</a> |
           <a href="{% url 'user_follow' %}" class="button-nav">Abonnements</a> |
-          <a href="{% url 'deconnexion' %}" class="button-nav"
-            >Se déconnecter</a
-          >
+          <a href="{% url 'deconnexion' %}" class="button-nav">Se déconnecter</a>
         </nav>
-      </div>
-      <hr />
-      {% block content %}
-      <!-- Contenu par défaut si le block n'est pas surchargé -->
-      {% endblock %}
+      </header>
+      <hr/>
+      <main>
+        {% block content %}
+        <!-- Contenu par défaut si le block n'est pas surchargé -->
+        {% endblock %}
+      </main>
     </div>
   </body>
 </html>

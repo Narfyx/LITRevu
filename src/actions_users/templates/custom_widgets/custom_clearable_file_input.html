@@ -1,0 +1,15 @@
+{% if widget.is_initial %}
+    <a href="{{ widget.value.url }}">
+        <br>
+        <br>
+        <img src="{{ widget.value.url }}" alt="{{ widget.value }}" 
+            style="max-width: 200px; max-height: 200px; margin-left: 12%;">
+    </a>
+    {% if not widget.is_required %}
+    <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}" style="margin-left: 1%;">
+    <label for="{{ widget.checkbox_id }}" >{{ widget.checkbox_label }} Clear</label>
+    <br>
+    {% endif %}
+{% endif %}
+<br>
+<input type="file" name="{{ widget.name }}" id="{{ widget.attrs.id }}">

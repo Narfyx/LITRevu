@@ -1,9 +1,10 @@
-{% extends 'user_actions_base.html' %} {% block content %} {% load static %}
-<head>
-  <link rel="stylesheet" href="{% static 'actions_users/css/flux.css' %}" />
-</head>
-<body>
-  <h2 class="title">Mes posts</h2>
-  {% include 'partials/render_flux.html' with post=post %}
-</body>
+{% extends 'user_actions_base.html' %} 
+{% block content %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'actions_users/css/flux.css' %}" />
+{% endblock %}
+
+<h2 class="title">Mes posts</h2>
+{% include 'partials/render_flux.html' with post=post %}
 {% endblock %}

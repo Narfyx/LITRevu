@@ -1,19 +1,20 @@
-{% extends 'user_actions_base.html' %} {% block content %} {% load static %}
-<head>
-  <link
-    rel="stylesheet"
-    href="{% static 'actions_users/css/user_create_post.css' %}"
-  />
-</head>
-<body>
-  <h2>Créer une critique</h2>
-  <div>
-    {% include 'partials/render_ticket_card_format.html' with post=ticket %}
-  </div>
-  <form method="post" enctype="multipart/form-data">
-    {{ review_form.errors }} {{ review_form }} {% csrf_token %}
+{% extends 'user_actions_base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'actions_users/css/user_create_post.css' %}" />
+
+<h2>Créer une critique</h2>
+<div>
+    {% include 'partials/render_ticket.html' with post=ticket %}
+</div>
+<form method="post" enctype="multipart/form-data">
+    {{ review_form.errors }}
+    {{ review_form }}
+    {% csrf_token %}
     <button type="submit" class="btn-sub">Envoyer</button>
-    <script src="{% static 'actions_users/js/character.js' %}"></script>
-  </form>
-</body>
+</form>
+
+<script src="{% static 'actions_users/js/character.js' %}"></script>
 {% endblock %}
+

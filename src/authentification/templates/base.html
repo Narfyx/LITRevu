@@ -1,26 +1,25 @@
 {% load static %}
 <!DOCTYPE html>
+<html lang="fr">
 <head>
     <title>LITReview</title>
-    <!DOCTYPE html>
-    <html lang="fr">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'authentification/styles.css' %}">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>LITReview</h1> <!-- Traduction du texte -->
-        </div>
+        <header class="header"> <!-- en-tête -->
+            <h1>LITReview</h1>
+        </header>
         <hr />
-        <div class="content">
+        <main class="content"> <!-- contenu principal -->
             {% block content %}
             <!-- Contenu par défaut si le block n'est pas surchargé -->
             {% endblock %}
-        </div>
+        </main>
         
         {% if messages %}
-        <div class="error-messages">
+        <div class="error-messages" role="alert"> <!-- role="alert" pour les messages d'erreur -->
             {% for message in messages %}
             <p class="error">{{ message }}</p>
             {% endfor %}
@@ -29,4 +28,4 @@
         <div class="clearfix"></div>
     </div>
 </body>
-</html> 
+</html>

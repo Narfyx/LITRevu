@@ -1,21 +1,58 @@
+"""
+Forms for creating and editing tickets and reviews.
+"""
+
 from django import forms
 
 from .models import Review, Ticket
 
 
-class SearchUserForm(forms.Form):
-    search_query = forms.CharField(label="Rechercher", max_length=100)
+class CustomClearableFileInput(forms.ClearableFileInput):
+    """
+    A custom clearable file input widget.
+
+    Attributes:
+        template_name (str): Path to the custom template for this widget.
+    """
+
+    template_name = "custom_widgets/custom_clearable_file_input.html"
 
 
 class TicketForm(forms.ModelForm):
+    """
+    A form for creating and editing tickets.
+    """
 
     class Meta:
+        """
+        model (Ticket): The model associated with this form.
+
+        fields (list): List of fields to include in the form.
+
+        widgets (dict): Custom widgets for form fields.
+        """
+
         model = Ticket
         fields = ["title", "description", "image"]
+        widgets = {
+            "image": CustomClearableFileInput,
+        }
 
 
 class ReviewForm(forms.ModelForm):
+    """
+    A form for creating and editing reviews.
+    """
+
     class Meta:
+        """
+        model (Review): The model associated with this form.
+
+        fields (list): List of fields to include in the form.
+
+        widgets (dict): Custom widgets for form fields.
+        """
+
         model = Review
         fields = ["headline", "rating", "body"]
         widgets = {

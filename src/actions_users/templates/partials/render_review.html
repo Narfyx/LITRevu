@@ -1,3 +1,7 @@
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'actions_users/css/stars_rating.css' %}" />
+{% endblock %}
 <div class="post">
   <div class="post-header">
     {% if user == post.user %}
@@ -7,11 +11,13 @@
     {% endif %}
     <span class="post-date">{{ post.time_created|date:"H:i, d F Y" }}</span>
   </div>
-  <div>
+  <div class="post-title-container">
     <h4 class="post-title">{{ post.headline }}</h4>
     {% if post.rating %}
-    <p class="post-rating">{{ post.rating }}</p>
+      <div class="post-rating" data-rating="{{ post.rating }}"></div>
     {% endif %}
+  </div>
+  <div>
     {% if post.body %}
     <p class="post-description">{{ post.body }}</p>
     {% endif %}
@@ -25,4 +31,5 @@
     <a href="{% url 'delete_review' review_id=post.id %}" class="buttons" onclick="return confirm('Voulez-vous vraiment supprimer cette critique ?');">Supprimer la critique</a>
   </div>
   {% endif %}
+  <script src="{% static 'actions_users/js/stars_rating.js' %}"></script>
 </div>

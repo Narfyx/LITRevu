@@ -1,0 +1,43 @@
+.post-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.post-title {
+  margin-right: 10px; /* Ajustez l'espacement entre le titre et les étoiles */
+}
+
+.star-rating {
+  display: inline-block;
+  font-size: 0;
+  position: relative;
+  width: 110px; /* Ajustez cette valeur selon la taille des étoiles */
+  margin-bottom: 8px;
+}
+
+.star-rating::before {
+  content: "★★★★★";
+  display: block;
+  font-size: 22px; /* Ajustez cette valeur selon la taille des étoiles */
+  letter-spacing: 3px;
+  color: #ccc; /* Couleur des étoiles inactives */
+  margin-bottom: 8px;
+}
+
+.star-rating span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.star-rating span::before {
+  content: "★★★★★";
+  display: block;
+  font-size: 22px; /* Ajustez cette valeur selon la taille des étoiles */
+  letter-spacing: 3px;
+  color: #f5a623; /* Couleur des étoiles actives */
+  margin-bottom: 8px;
+}

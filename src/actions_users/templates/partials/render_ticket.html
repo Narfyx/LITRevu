@@ -1,3 +1,8 @@
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'actions_users/css/flux.css' %}" />
+{% endblock %}
+<body>
 <div class="post">
   <div class="post-header">
     {% if user == post.user %}
@@ -24,9 +29,11 @@
   </div>
   {% endif %} {% endif %} 
   {% if request.path == "/my_post" and user == post.user %}
+  {% if passthrough_review.user.username != user.username %}
   <div class="post-footer">
     <a href="{% url 'ticket_edit' ticket_id=post.id %}" class="buttons">Modifier le ticket</a>
     <a href="{% url 'delete_ticket' ticket_id=post.id %}" class="buttons" onclick="return confirm('Voulez-vous vraiment supprimer ce ticket ?');">Supprimer le ticket</a>
   </div>
-  {% endif %}
+  {% endif %} {% endif %}
 </div>
+</body>
