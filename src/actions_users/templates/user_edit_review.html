@@ -1,21 +1,16 @@
 {% extends 'user_actions_base.html' %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'actions_users/css/user_create_post.css' %}" />
-{% endblock %}
-
 {% block content %}
+<link rel="stylesheet" href="{% static 'actions_users/css/user_create_post.css' %}" />
 <h2>Modifier la critique</h2>
-
 <form method="post" enctype="multipart/form-data">
   {{ review_form.errors }} 
   {{ review_form }} 
   {% csrf_token %}
   <button type="submit" class="btn-sub">Enregistrer les modifications</button>
 </form>
-{% endblock %}
-
-{% block extra_js %}
 <script src="{% static 'actions_users/js/character.js' %}"></script>
 {% endblock %}
+
+

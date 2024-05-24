@@ -2,14 +2,11 @@ name = 'admin'
 password = 'azerty12345'
 email = 'admin@litrevu.fr'
 
-
 name = 'toto'
 password = '$n3t_#Dy#jNzjj6'
 
-
 name = 'titi'
 password = 'azerty12345*'
-
 
 name = 'alice'
 password = 'Passw0rd!'
