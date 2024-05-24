@@ -4,7 +4,7 @@
 
 Project 9: Develop a Web Application using Django
 
-![alt text](Pasted image 20240524175651.png)
+![alt text](exemple_review.png)
 
 ## Objective:
 
@@ -91,11 +91,11 @@ python src\manage.py runserver
 ```
 
 You will see this message in your terminal:
-![alt text](Pasted image 20240524175309.png)
+![alt text](server_start.png)
 
 Open your web browser and go to [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-![alt text](Pasted image 20240524175802.png)
+![alt text](connexion_page.png)
 
 You can create your account or use this example user: username: "titi"
 password: "azerty12345*"
