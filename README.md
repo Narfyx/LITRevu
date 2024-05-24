@@ -4,8 +4,6 @@
 
 Project 9: Develop a Web Application using Django
 
-![alt text](exemple_review.png)
-
 ## Objective:
 
 You now master Python programming best practices as well as user interface development.
